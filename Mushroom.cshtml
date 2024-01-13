@@ -1,0 +1,55 @@
+﻿@using WebMatrix.Data
+
+@{
+    var id = Request.QueryString["mushroom"];
+    var db = Database.Open("Mushroom");
+    var sql = "SELECT * FROM Family AS f JOIN Mushroom AS m ON m.MushroomFamily = f.FamilyID join Gillspacing as g on g.SpacingCode = m.gillspacing join Surface as su on su.SurfaceID = m.Cap_surface or su.SurfaceID = m.stem_surface";
+
+    var aa = db.QuerySingle(sql, id);
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .jumbotron {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+    </style>
+</head>
+<body>
+    <div class="jumbotron pt-1 pb-1 mt-2">
+        <h2 class="text-center">Order Details</h2>
+    </div>
+    {
+        <form method="post">
+            <button type="submit" name="delete" class="btn btn-danger" value="@aa.name">Delete</button>
+        </form>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@aa.name</h5>
+                            <ul class="list-group">
+                                <p>Channel Name: @aa.stemRoot</p>
+                                <p>Channel Type: @aa.SurfaceName<</p>
+                                <p>Payment Amount: @aa.SpacingName</p>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</body>
+</html>
